@@ -7,3 +7,4 @@ import com.leojaveiro.projetinho.entities.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 }
+	
