@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.leojaveiro.projetinho.entities.Category;
 import com.leojaveiro.projetinho.entities.Order;
+import com.leojaveiro.projetinho.entities.OrderItem;
 import com.leojaveiro.projetinho.entities.Product;
 import com.leojaveiro.projetinho.entities.User;
 import com.leojaveiro.projetinho.entities.enums.OrderStatus;
 import com.leojaveiro.projetinho.repositories.CategoryRepository;
+import com.leojaveiro.projetinho.repositories.OrderItemRepository;
 import com.leojaveiro.projetinho.repositories.OrderRepository;
 import com.leojaveiro.projetinho.repositories.ProductRepository;
 import com.leojaveiro.projetinho.repositories.UserRepository;
@@ -34,6 +36,9 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private ProductRepository productRepository;
 
+	@Autowired
+	private OrderItemRepository orderItemRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		User u1 = new User(null, "Maria Bronw", "maria@email", "98888", "123456");
@@ -65,6 +70,12 @@ public class TestConfig implements CommandLineRunner {
 		p4.getCategories().add(cat3);
 		p5.getCategories().add(cat2);
 		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p1, 2, p1.getPrice());
+		
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}
 }
